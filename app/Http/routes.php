@@ -59,3 +59,22 @@ Route::get('user/profile/long_url', ['as' => 'profile', function () {
 Route::get('user/{id}', function ($id) {
     return "user id contains just number : ".$id;
 })->where('id', '[0-9]+');
+
+
+#----------------------------------------------------------------------------------Controller section
+
+/**
+ * simple controller that pass id from url to showUserId function with one input argument
+ */
+Route::get('simpleController/{id}', 'simpleController@showUserId');
+
+#Middleware may be assigned to the controller's routes like so
+Route::get('profile', [
+    'middleware' => 'auth',
+    'uses' => 'UserController@showProfile'
+]);
+
+/**
+ * handle all type of request for /photo url and in the controller has pre made functions
+ */
+Route::resource('photo', 'PhotoController');
